@@ -8,8 +8,8 @@ public class Main {
             if(i % 5 == 0 && sumOfDigit(i) % 5 == 0)
                 System.out.println(i);
         }
-        System.out.println();
 
+        System.out.println();
 //        Task 2
 //        2. Verilmiş ədədin neçə mərtəbəli olduğunu təyin edin. Məs: İnput: 23456  Output: 5
 //        ve teklik, onluq, yuzluk mertebe siniflerinnen hansina aiddirse ekrana onu yazdirin
@@ -30,7 +30,6 @@ public class Main {
         System.out.println(tmp % 10 + " - teklik");
 
         System.out.println();
-
 //      Task 3
 //      3. Verlmiş ədədin sadə rəqəmlərinin cəmini tapın. Məs: İnput: 123456  Output: 11
 
@@ -58,28 +57,69 @@ public class Main {
 //        Task 4
 //        4. Verlmiş ədədin palindrome olub-olmamasını yoxlayın. Məs: İnput: 123321 Output: true
 
-        number = 121;
+        number = 1251;
         tmp = number;
         int palindrom = 0;
-        int counter = ;
 
         while(number > 0) {
-            digit +=  number % 10;
-
-
+            palindrom = (palindrom * 10) + (number % 10);
 
             number /= 10;
         }
 
-        System.out.println(121 % 10);
-        System.out.println(121 % 100);
-        System.out.println(121 % 1000);
+        if (tmp == palindrom)
+            System.out.println(tmp + " is palindrome");
+        else
+            System.out.println(tmp + " is not palindrome");
+
 
         System.out.println();
+//        Task 5
+//        İnteger massivində verilmiş ədədlərin ən böyüyünü tapın. Məs: İnput: [10,23,2,45,7]  Output: 45
+        int numbers[] = {10, -5, 254, 1, 2, 999};
+        int max = Integer.MIN_VALUE;
 
-        System.out.println(121 / 10);
-        System.out.println(121 / 100);
-        System.out.println(121 / 1000);
+        for (int num:numbers) {
+            if(num > max)
+                max = num;
+        }
+
+        System.out.println(max);
+
+//        Task 6
+//        Verilmiş ədədin rəqəmlərinin unikal(təkrarlanmayan) olub-olmamasını yoxlayın.
+//        Məs: İnput: 53213 Output: false(3 ədədi təkrarlanır)
+
+        number = 53213;
+        String nums = Integer.toString(number);
+        boolean isRepeat = false;
+
+        for (int i = 0; i < nums.length(); i++) {
+
+            for (int j = i + 1; j < nums.length(); j++) {
+
+                if(nums.charAt(i) == nums.charAt(j)) {
+
+                    isRepeat = true;
+                    i = nums.length();
+                    break;
+                }
+            }
+
+        }
+
+        System.out.println(isRepeat);
+
+        System.out.println();
+//        Task 7
+//        1-1000 qədər ədədlərin içərisindən ələ ədədləri çap et ki:
+//        rəqəmləri cəmi 3-ə bölünsün və sonuncu rəqəm 3 olmasın.
+
+        for(int i = 0; i <= 1000; i++) {
+//            if(sumOfDigit(i) % 3 == 0 && i % 10 != 3)
+//                System.out.println(i);
+        }
+
     }
     public static int sumOfDigit(int number) {
         int sum = 0;
