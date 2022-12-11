@@ -1,3 +1,6 @@
+import java.math.BigDecimal;
+import java.math.RoundingMode;
+
 public class Main {
     public static void main(String[] args) {
 
@@ -49,6 +52,51 @@ public class Main {
         }
 
         // 2. Sinifde etdiyimiz kocurulme komissiyasini BigDecimal ile hell etmek.
+        // 0 - 100 0%
+        // 101 - 500 5%
+        // 501 - 700 7%
+        /// 701+ 10%
+
+        input = 1000;
+        BigDecimal amount = new BigDecimal(input);
+        BigDecimal fee = new BigDecimal(0);
+
+        if(input <= 100) {
+
+            System.out.println("Amount = " + amount);
+            System.out.println("Fee = " + fee);
+        } else if (input <= 500) {
+
+            amount = amount.subtract(new BigDecimal(100));
+            fee = amount.multiply(BigDecimal.valueOf(0.05));
+
+            System.out.println("Amount = " + input);
+            System.out.println("Fee = " + fee);
+        } else if (input <= 700) {
+
+            fee = new BigDecimal(400 * 0.05);
+
+            amount = amount.subtract(new BigDecimal(500));
+
+            fee = fee.add(
+                    amount.multiply(BigDecimal.valueOf(0.07))
+            );
+
+            System.out.println("Amount = " + input);
+            System.out.println("Fee = " + fee);
+        } else {
+            fee = new BigDecimal(400 * 0.05);
+            fee = fee.add(new BigDecimal(200 * 0.07));
+
+            amount = amount.subtract(new BigDecimal(700));
+
+            fee = fee.add(
+                    amount.multiply(BigDecimal.valueOf(0.1))
+            );
+
+            System.out.println("Amount = " + input);
+            System.out.println("Fee = " + fee);
+        }
 
         // 3. Üç nəfərin yaşını artan qaydada sıralayan bir proqram yazın.
         int asimanAge = 30;
