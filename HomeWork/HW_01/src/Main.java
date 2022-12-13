@@ -90,9 +90,9 @@ public class Main {
 
             amount = amount.subtract(new BigDecimal(700));
 
-            fee = fee.add(
-                    amount.multiply(BigDecimal.valueOf(0.1))
-            );
+//            fee = fee.add(
+//                    amount.multiply(BigDecimal.valueOf(0.1))
+//            );
 
             System.out.println("Amount = " + input);
             System.out.println("Fee = " + fee);

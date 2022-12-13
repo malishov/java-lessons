@@ -1,16 +1,31 @@
 package model;
+
+import java.util.List;
+
 public class Book {
     private String name;
     private Author authorName;
     private int publishedYear;
     private int pageCount;
+    private List<Unit> units;
+
+    private  Publisher publisher;
+
+    public Publisher getPublisher() {
+        return publisher;
+    }
+
+    public void setPublisher(Publisher publisher) {
+        this.publisher = publisher;
+    }
 
     public Book() {
     }
 
-    public Book(String name, String authorName, int publishedYear, int pageCount) {
+    public Book(String name, String authorName, Publisher publisher, int publishedYear, int pageCount) {
         this.name = name;
         this.authorName = new Author(authorName);
+        this.publisher = publisher;
         this.publishedYear = publishedYear;
         setPageCount(pageCount);
     }
@@ -40,6 +55,22 @@ public class Book {
             throw new RuntimeException("Page count should be more than 10");
         }
         this.pageCount = pageCount;
+    }
+
+    public Author getAuthorName() {
+        return authorName;
+    }
+
+    public void setAuthorName(Author authorName) {
+        this.authorName = authorName;
+    }
+
+    public List<Unit> getUnits() {
+        return units;
+    }
+
+    public void setUnits(List<Unit> units) {
+        this.units = units;
     }
 
     public String getDetails(){

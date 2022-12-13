@@ -20,8 +20,6 @@ public class Publisher {
 
     @Override
     public String toString() {
-        return "Publisher{" +
-                "name='" + name + '\'' +
-                '}';
+        return name;
     }
 }
