@@ -94,4 +94,20 @@ public class GlobalSeeder {
 
         return Math.round(finalPrice * 100.0) / 100.0;
     }
+
+    public static long getGlobalItemId() {
+        return globalItemId;
+    }
+
+    public static long getGlobalReceiptId() {
+        return globalReceiptId;
+    }
+
+    public static void setGlobalItemId(long globalItemId) {
+        GlobalSeeder.globalItemId = globalItemId;
+    }
+
+    public static void setGlobalReceiptId(long globalReceiptId) {
+        GlobalSeeder.globalReceiptId = globalReceiptId;
+    }
 }

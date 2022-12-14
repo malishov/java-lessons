@@ -16,8 +16,8 @@ public class Repository {
     private List<Receipt> receipts;
 
     public Repository() {
-        this.items = GlobalSeeder.generateItem(12);
-        this.receipts = GlobalSeeder.generateRandomReceipts(5, this.items);
+        this.items = GlobalSeeder.generateItem(10);
+        this.receipts = GlobalSeeder.generateRandomReceipts(0, this.items);
     }
 
     public List<Item> getItems() {
@@ -32,13 +32,18 @@ public class Repository {
 
         List<SaleItem> saleItems = addSaleItem(numbers);
 
+
+
         if (saleItems.size() > 0) {
-            long receiptId = receipts.get(receipts.size() - 1).getId() + 1;
+            long receiptId = GlobalSeeder.getGlobalReceiptId();
+            GlobalSeeder.setGlobalReceiptId(++receiptId);
             double newPrice = GlobalSeeder.receiptPrice(saleItems);
 
             Receipt newReceipt = new Receipt(receiptId, newPrice, saleItems, LocalDate.now());
 
             receipts.add(newReceipt);
+            System.out.println("New Receipt:");
+            System.out.println(newReceipt);
         }
 
     }

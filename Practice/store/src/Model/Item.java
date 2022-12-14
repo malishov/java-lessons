@@ -60,11 +60,11 @@ public class Item {
     @Override
     public String toString() {
         return "Item{" +
-                "\nid=" + id +
-                "\n, name='" + name + '\'' +
-                "\n, price=" + price +
-                "\n, count=" + count +
-                "\n, categories=" + categories +
-                '}';
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", price=" + price +
+                ", count=" + count +
+                ", categories=" + categories +
+                '}' + "\n";
     }
 }
