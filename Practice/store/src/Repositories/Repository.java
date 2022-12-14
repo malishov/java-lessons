@@ -32,8 +32,6 @@ public class Repository {
 
         List<SaleItem> saleItems = addSaleItem(numbers);
 
-
-
         if (saleItems.size() > 0) {
             long receiptId = GlobalSeeder.getGlobalReceiptId();
             GlobalSeeder.setGlobalReceiptId(++receiptId);
@@ -89,7 +87,6 @@ public class Repository {
     }
 
     // Refunds
-
     public void refundItem(String input) {
         // SaleItem saleItem, long receiptId
 
