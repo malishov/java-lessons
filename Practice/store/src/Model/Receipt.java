@@ -52,9 +52,9 @@ public class Receipt {
     public String toString() {
         return "\nReceipt " +
                 "id = " + id +
-                "\n, finalPrice=" + finalPrice +
-                "\n, soldItem=" + soldItem +
-                "\n, saleDate=" + saleDate +
+                "\n, finalPrice = " + finalPrice +
+                "\n, soldItem = " + soldItem +
+                "\n, saleDate = " + saleDate +
                 "\n============================================================";
     }
 }

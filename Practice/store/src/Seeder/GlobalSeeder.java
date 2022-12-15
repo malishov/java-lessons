@@ -13,7 +13,9 @@ public class GlobalSeeder {
     private static long globalItemId = 0;
     private static long globalReceiptId = 0;
 
-    public static List<Item> generateItem(int count) {
+    // Random Generate
+    //-------------------------------------------------------------------------------------------
+    public static List<Item> generateRandomItems(int count) {
         List<Item> items = new ArrayList<>();
 
         for (int i = 1; i <= count; i++) {
@@ -27,7 +29,6 @@ public class GlobalSeeder {
         }
         return items;
     }
-
     public static List<Receipt> generateRandomReceipts(int count , List<Item> items) {
         List<Receipt> receipts = new ArrayList<>();
 
@@ -41,7 +42,6 @@ public class GlobalSeeder {
 
         return receipts;
     }
-
     public static List<SaleItem> generateRandomSaleItem(int count, List<Item> itemsInStock) {
 
         List<SaleItem> saleItems = new ArrayList<>();
@@ -64,7 +64,6 @@ public class GlobalSeeder {
         }
         return saleItems;
     }
-
     public static ItemCategory getRandomItemCategory() {
         int length = ItemCategory.values().length;
         int index = (int) (Math.random() * length);
@@ -72,6 +71,8 @@ public class GlobalSeeder {
         return ItemCategory.values()[index];
     }
 
+    // Checkers
+    //-------------------------------------------------------------------------------------------
     public static boolean checkItemInListExist(int id, List<Item> itemsInStock) {
 
         boolean result = false;
@@ -84,7 +85,6 @@ public class GlobalSeeder {
 
         return result;
     }
-
     public static double receiptPrice(List<SaleItem> saleItems) {
         double finalPrice = 0;
 
@@ -95,18 +95,18 @@ public class GlobalSeeder {
         return Math.round(finalPrice * 100.0) / 100.0;
     }
 
+
+    // Getter and Setters
+    //-------------------------------------------------------------------------------------------
     public static long getGlobalItemId() {
         return globalItemId;
     }
-
     public static long getGlobalReceiptId() {
         return globalReceiptId;
     }
-
     public static void setGlobalItemId(long globalItemId) {
         GlobalSeeder.globalItemId = globalItemId;
     }
-
     public static void setGlobalReceiptId(long globalReceiptId) {
         GlobalSeeder.globalReceiptId = globalReceiptId;
     }

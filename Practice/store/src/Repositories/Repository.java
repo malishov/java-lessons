@@ -1,6 +1,7 @@
 package Repositories;
 
 import Model.Item;
+import Model.ItemCategory;
 import Model.Receipt;
 import Model.SaleItem;
 import Seeder.GlobalSeeder;
@@ -16,18 +17,19 @@ public class Repository {
     private List<Receipt> receipts;
 
     public Repository() {
-        this.items = GlobalSeeder.generateItem(10);
+        this.items = GlobalSeeder.generateRandomItems(10);
         this.receipts = GlobalSeeder.generateRandomReceipts(0, this.items);
     }
 
     public List<Item> getItems() {
         return items;
     }
-
     public List<Receipt> getReceipts() {
         return receipts;
     }
 
+    // Add Functions
+    //-------------------------------------------------------------------------------------------
     public void addReceipt(String numbers) {
 
         List<SaleItem> saleItems = addSaleItem(numbers);
@@ -58,7 +60,7 @@ public class Repository {
                 elementId = Integer.parseInt(idAndCountList[i - 1]); // id = i - 1
                 count = Integer.parseInt(idAndCountList[i]); // count = i
 
-                if (isExistInStock(elementId, count) > 0) {
+                if (isItemExistInStock(elementId, count) > 0) {
 
                     Item newSalesItem = findItemById(elementId);
                     saleItems.add(new SaleItem(newSalesItem, count, newSalesItem.getPrice()));
@@ -67,7 +69,40 @@ public class Repository {
         }
         return  saleItems;
     }
-    public int isExistInStock(long id, int count) {
+
+    public void addItem(String details, String category) {
+
+        String[] inputList = details.split(" ");
+
+        if (inputList.length == 3) {
+            System.out.println("test");
+            long id = GlobalSeeder.getGlobalItemId();
+
+            Item newItem = new Item(
+                    id,
+                    inputList[0],
+                    Double.parseDouble(inputList[1]),
+                    Integer.parseInt(inputList[2]),
+                    ItemCategory.valueOf(category)
+            );
+
+            GlobalSeeder.setGlobalItemId(++id);
+            items.add(newItem);
+
+            System.out.println("Test2");
+            System.out.println(items);
+
+        }
+
+        // public Item(long id, String name, double price, int count, ItemCategory categories)
+
+//        Item newItem =
+
+    }
+
+    // Checker Function
+    //-------------------------------------------------------------------------------------------
+    public int isItemExistInStock(long id, int count) {
 
         for (Item item : items) {
 
@@ -86,28 +121,64 @@ public class Repository {
         return 0;
     }
 
-    // Refunds
+    // Refunds Functions
+    //-------------------------------------------------------------------------------------------
     public void refundItem(String input) {
-        // SaleItem saleItem, long receiptId
 
         String[] ids = input.split("[^0-9]");
         long saleItemId = Long.parseLong(ids[0]);
         long receiptId = Long.parseLong(ids[1]);
 
+        Item item = findItemById(saleItemId);
         Receipt receipt = findReceiptById(receiptId);
+
         List<SaleItem> soldItems = receipt.getSoldItem();
 
+        if (receipt == null || item == null) {
+            System.out.println("Qəbz/Məhsul sistemdə tapılmadı");
+            return;
+        }
+
+        System.out.println(receipt);
+
         for (int i = 0; i < soldItems.size(); i++) {
+
             if (saleItemId == soldItems.get(i).getItem().getId()) {
+
                 long itemId = soldItems.get(i).getItem().getId();
                 findItemById(itemId).setCount(findItemById(itemId).getCount() + soldItems.get(i).getCount());
                 soldItems.remove(i);
             }
         }
+
+        receipt.setFinalPrice(GlobalSeeder.receiptPrice(receipt.getSoldItem()));
+        System.out.println(receipt);
     }
 
-    // Find
+    public void refundReceipt(String input) {
 
+        long receiptId = Long.parseLong(input);
+
+        Receipt receipt = findReceiptById(receiptId);
+
+        if (receipt == null) {
+            System.out.println("Qəbz sistemdə tapılmadı");
+            return;
+        }
+
+        List<SaleItem> saleItems = receipt.getSoldItem();
+
+
+        for (SaleItem item : saleItems) {
+            Item tmpItem = findItemById(item.getItem().getId());
+            tmpItem.setCount(tmpItem.getCount() + item.getCount());
+        }
+
+        receipts.remove(receipt);
+    }
+
+    // Find Functions
+    //-------------------------------------------------------------------------------------------
     public Item findItemById(long id) {
 
         for (Item item : items) {
@@ -125,6 +196,18 @@ public class Repository {
         }
 
         return null;
+    }
+
+    public List<Item> findByCategory(String category) {
+        List<Item> tempItems = new ArrayList<>();
+
+        for (Item element : items) {
+
+            if (element.getCategories().toString().equals(category) )
+                tempItems.add(element);
+        }
+
+        return tempItems;
     }
 
 

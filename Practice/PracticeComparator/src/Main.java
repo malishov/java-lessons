@@ -19,12 +19,10 @@ public class Main {
 //        PersonNameComparator comparator = new PersonNameComparator();
 
 
-        System.out.println(humans.);
+        System.out.println(humans);
 
         Collections.sort(humans, new PersonNameComparator());
 
-
         System.out.println(humans.toArray());
-
     }
 }
