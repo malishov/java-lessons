@@ -10,7 +10,7 @@ public class Main {
         //Task2(input);
         //Task4(input);
         //Fizzbuzz.Task2(15);
-        //System.out.println(MyMath.add("256", "159624783"));;
+        System.out.println(MyMath.add("256", "159624783"));;
 
         System.out.println(MyMath.multiply("2565", "15"));
 

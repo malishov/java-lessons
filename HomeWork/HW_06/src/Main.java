@@ -16,13 +16,11 @@ public class Main {
 //
 //        ui.run();
 
-
         Task3();
     }
 
     public static void Task3() {
 //        Doğum tarixini qəbul edib bütün ad günlərinin həftənin hansı günlərinə düşdüyünü çap etmək
-
 
         Scanner scanner = new Scanner(System.in);
 
@@ -31,13 +29,8 @@ public class Main {
         String input = scanner.nextLine();
         LocalDate DOB = LocalDate.parse(input);
 
-        System.out.println(DOB.isBefore(LocalDate.now()));
-
-
-
-        for (LocalDate i = DOB; i.isBefore(LocalDate.now()); i = i.plusYears(1)) {
+        for (LocalDate i = DOB; i.isBefore(LocalDate.now().plusDays(1)); i = i.plusYears(1)) {
             System.out.println(i.getYear() + " " + i.getDayOfWeek());
-//            DOB = DOB.plusYears(1);
         }
 
 //        for (int i = 1998; i <= LocalDate.now().getYear(); i++) {
