@@ -11,8 +11,15 @@ public class Main {
 
 //        System.out.println(LocalDateTime.now());
 
-        Task1();
+//        Task1();
 
+        int[] nums = {2, 7, 11, 15};
+        String s = "abcabcbb";
+
+        System.out.println(lengthOfLongestSubstring(s));
+
+
+//        twoSum(nums, 9);
 
 
 //        Task2();
@@ -71,5 +78,39 @@ public class Main {
 
 //        for (int i = 0; i < test.getSize(); i++)
 //            System.out.println(test.find(i + 15));
+    }
+
+
+    public static void twoSum(int[] nums, int target) {
+
+        HashMap<Integer, Integer> numbers = new HashMap<>();
+
+        for (int i = 0; i < nums.length; i++)
+            numbers.put(nums[i], i);
+
+
+        for (int i = 0; i < nums.length; i++) {
+            int tmp = target - nums[i];
+
+            if (numbers.containsValue(tmp)) {
+                System.out.println(i + " " + numbers.get(tmp));
+            }
+        }
+
+//        for (int i = 0; i < nums.length; i++)
+//            for(int j = i + 1; j < nums.length; j++)
+//                if (numbers.get(i) + numbers.get(j) == target)
+//                    System.out.println(i + " " + j);
+
+
+    }
+
+    // ABBA - AB BA
+    public static int lengthOfLongestSubstring(String s) {
+
+
+
+        return 0;
+
     }
 }

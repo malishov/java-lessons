@@ -39,7 +39,10 @@ public class LRUCache <T> {
         }
     }
 
+
+
     public T getElement(int index) {
+
         List<T> keys = new ArrayList<>(cache.keySet());
 
         LocalDateTime dateTime = LocalDateTime.now();
