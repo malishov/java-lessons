@@ -1,6 +1,3 @@
-import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -8,6 +5,7 @@ import org.jsoup.select.Elements;
 
 import java.io.IOException;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Set;
 
 public class Task2 {
@@ -16,72 +14,52 @@ public class Task2 {
 
     // 56 - 5 = 51
 
+    //public static
+
     public static void run() throws IOException {
 
-        int count = 0;
-        for (String link : findLinks("https://code.edu.az/")) {
-            System.out.println(link);
-            count++;
-        }
+        Set<String> result = new HashSet<>();
 
-        System.out.println(count);
+        result = findLinks("https://code.edu.az/", result);
 
-//
-//        Document doc = Jsoup.connect("https://code.edu.az/").get();
-//        doc.select("p").forEach(System.out::println);
-
+        System.out.println(result.size());
     }
 
-    private static Set<String> findLinks(String url) throws IOException {
+    private static Set<String> findLinks(String url, Set lastSet) throws IOException {
 
-        Set<String> links = new HashSet<>();
+        Set<String> links = lastSet;
 
-        Document doc = Jsoup.connect(url)
-                .data("query", "Java")
-                .userAgent("Mozilla")
-                .cookie("auth", "token")
-                .timeout(3000)
-                .get();
+        try {
+            Document doc = Jsoup.connect(url)
+                    .data("query", "Java")
+                    .userAgent("Mozilla")
+                    .cookie("auth", "token")
+                    .get();
 
-        Elements elements = doc.select("a[href]");
+            Elements elements = doc.select("a[href]");
 
-        for (Element element : elements) {
+            if (elements.isEmpty())
+                return null;
 
-            String tmpUrl = element.attr("href");
+            elements.stream()
+                    .map(link -> link.attr("href"))
+                    .forEach(thisLink -> {
+                        boolean add = links.add(thisLink);
 
-            if (tmpUrl.startsWith("https")) {
+                        if (add && thisLink.contains("https://code.edu.az")) {
+                            System.out.println(thisLink);
 
-//                if (links.contains(tmpUrl))
-//                    System.out.println("SAME" + tmpUrl);
+                            try {
+                                findLinks(thisLink, links);
+                            } catch (IOException e) {
+//                                System.out.println(e.getMessage());
+                            }
+                        }
+                    });
 
-
-                links.add(tmpUrl);
-                if (!links.contains(tmpUrl)) {
-
-                    System.out.println(tmpUrl);
-
-//                    links.addAll(findLinks(tmpUrl));
-                }
-
-
-            }
-
-
-
-//            if (element.toString().substring(0, 5).equals("https")) {
-//
-//                links.add(element.absUrl("href"));
-//
-//            }
-//            links.addAll(findLinks(element.attr("href")));
-//            links.add(element.attr("href"));
-
+        } catch (IOException e){
+//            System.out.println(e.getMessage());
         }
-
-        for (String s : links)
-            links.addAll(findLinks(s));
-
         return links;
-
     }
 }
