@@ -1,5 +1,7 @@
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
+
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.io.*;
 import java.util.Random;
@@ -11,7 +13,7 @@ public class Main {
 
 //        Task3();
 //        Task4();
-        Task5();
+//        Task5();
     }
 
     //3. try with resourse ile file-i oxuyub setir ve setir chapa verin
@@ -66,6 +68,8 @@ public class Main {
             System.out.println(a + " / " + b + " = " + result);
 
         } catch (ArithmeticException | CustomCheckedException  e) {
+//            logger.info("e.getMessage()");
+            logger.warn(e.getMessage());
             logger.warn(e.getMessage());
         }
     }
