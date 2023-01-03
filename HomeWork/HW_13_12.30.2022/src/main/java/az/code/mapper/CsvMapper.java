@@ -13,7 +13,9 @@ public class CsvMapper {
     public static void main(String[] args) throws IllegalAccessException, NoSuchMethodException, InvocationTargetException {
         Student s = new Student();
         int i = 0;
+
         if(s.getClass().isAnnotationPresent(Csv.class)){
+
             for(Field f : Student.class.getDeclaredFields()){
                 if(f.isAnnotationPresent(CsvColumn.class)){
                     CsvColumn columnAnnotation = f.getAnnotation(CsvColumn.class);

@@ -5,18 +5,17 @@ import models.Student;
 public class Main {
     public static void main(String[] args) {
 
-        int N = 3;
+//        int N = 2;
+//        HanoiTower.towerOfHanoi(N, 'A', 'C', 'B');
 
-        HanoiTower.towerOfHanoi(N, 'A', 'C', 'B');
 
+        Student student = Student.builder()
+                .age(15)
+                .name("Asiman")
+                .surname("Suleymanov")
+                .build();
 
-//        Student student = Student.builder()
-//                .age(15)
-//                .name("Asiman")
-//                .surname("Suleymanov")
-//                .build();
-//
-//        student = student.toBuilder().id(24l).build();
-//        log.info("STUDENT = " + student);
+        student = student.toBuilder().id(24l).build();
+        log.info("STUDENT = " + student);
     }
 }
