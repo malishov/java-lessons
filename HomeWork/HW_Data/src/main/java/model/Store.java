@@ -1,7 +1,15 @@
 package model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+
 import java.util.*;
 
+@Getter
+@Setter
+@ToString
 public class Store {
 
     private int id;
@@ -19,58 +27,6 @@ public class Store {
         this.name = name;
         this.percent = percent;
         this.amount = amount;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public double getPercent() {
-        return percent;
-    }
-
-    public void setPercent(double percent) {
-        this.percent = percent;
-    }
-
-    public double getAmount() {
-        return amount;
-    }
-
-    public void setAmount(double amount) {
-
-        this.amount = amount;
-    }
-
-    public Map<String, Double> getClients() {
-        return clients;
-    }
-
-    public void setClients(Map<String, Double> clients) {
-        this.clients = clients;
-    }
-
-    @Override
-    public String toString() {
-        return "Store{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", amount=" + amount +
-                ", percent=" + percent +
-                ", clients=" + clients +
-                '}';
     }
 
     @Override
