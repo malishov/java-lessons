@@ -1,0 +1,35 @@
+# Task 2
+# https://www.hackerrank.com/challenges/weather-observation-station-10/problem?isFullScreen=true
+
+SELECT DISTINCT city
+FROM station
+WHERE REGEXP_LIKE(city, '[^aeiou]$', 'i');
+
+# Task 3
+# https://leetcode.com/problems/combine-two-tables/
+
+select
+    firstName,
+    lastName,
+    city,
+    state
+from person
+left join address
+on person.personId = address.personId;
+
+# Task 4
+# https://leetcode.com/problems/employees-earning-more-than-their-managers/
+
+select
+    emp.name AS "Employee"
+from employee emp
+left join employee man
+on emp.managerId = man.id
+where emp.salary > man.salary;
+
+# Task 5
+# https://www.hackerrank.com/challenges/salary-of-employees/problem?isFullScreen=true
+
+SELECT Name
+FROM Employee
+WHERE Salary > 2000 AND months < 10
