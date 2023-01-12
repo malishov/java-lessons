@@ -1,0 +1,109 @@
+-- Task 1
+SELECT
+	job_title,
+	max_salary - min_salary AS "Difference"
+FROM jobs
+WHERE max_salary BETWEEN 12000 AND 18000;
+
+-- Task 2
+SELECT
+	*
+FROM employees
+WHERE commission_pct IS NULL 
+AND salary BETWEEN 7000 AND 12000
+AND department_id NOT IN (30, 50, 80);
+
+-- Task 3
+SELECT
+	concat(first_name, ' ' || last_name) AS "Full_Name",
+	hire_date,
+	commission_pct,
+	email,
+	REPLACE(phone_number, '.', '-'),
+	salary
+FROM employees
+WHERE salary > 11000
+ORDER BY 1 DESC;
+
+-- Task 4
+SELECT
+	first_name,
+	last_name,
+	salary
+FROM employees
+WHERE first_name LIKE '%m'
+AND hire_date > '1996-01-01';
+--AND hire_date > '2010-06-05';
+
+-- Task 5
+SELECT
+	concat(first_name, ' ' || last_name),
+	REPLACE(phone_number, '.', '-'),
+	salary
+FROM employees
+WHERE salary NOT BETWEEN 9000 AND 17000
+AND commission_pct IS NOT NULL;
+
+-- Task 6
+SELECT
+	*
+FROM departments dep
+LEFT JOIN employees emp
+ON dep.manager_id = emp.employee_id
+	LEFT JOIN locations loc
+	ON dep.location_id = loc.location_id
+WHERE department_name = 'Marketing';
+	
+
+-- Task 7
+SELECT
+	*
+FROM job_history
+ORDER BY employee_id DESC, start_date ;
+
+-- Task 8
+SELECT
+	job_id,
+	salary,
+	hire_date
+FROM employees
+WHERE phone_number LIKE '515%' 
+OR phone_number LIKE '590%'
+AND date_part('year', hire_date) <= '1995'
+--AND date_part('year', hire_date) <= '2003';
+ORDER BY hire_date, salary;
+
+-- Task 9
+SELECT
+	*
+FROM employees
+WHERE date_part('year', hire_date) = '1995';
+--WHERE date_part('year', hire_date) = '2001';
+
+-- Task 10
+SELECT
+	*
+FROM employees
+WHERE date_part('year', hire_date) != '1995'
+AND date_part('year', hire_date) != '1996';
+--WHERE date_part('year', hire_date) != '2006'
+--AND date_part('year', hire_date) != '2007';
+
+-- Task 11
+SELECT
+	email,
+	job_id,
+	first_name
+FROM employees
+WHERE date_part('year', hire_date) = '1995'
+--WHERE date_part('year', hire_date) = '2007'
+OR date_part('month', hire_date) = '1';
+
+
+-- Task 12
+SELECT
+	*
+FROM employees
+WHERE date_part('year', hire_date) > '1995'
+--WHERE date_part('year', hire_date) > '2007'
+OR salary < 10000;
